@@ -1,0 +1,146 @@
+<html> 
+  <head>
+    <style>
+        body{
+            background-color: black;
+            font-family: monospace !important;
+            font-size: larger !important;
+            letter-spacing: 0.1em !important;
+            cursor: default !important;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+        form {
+            display: flex;
+            flex-direction: row;
+        }
+
+        text, label{
+            color:rgb(0, 255, 64);
+        }
+
+        label {
+            padding-right: 1ch;
+        }
+
+        input{
+            background-color: black;
+            border-color: black;
+            color:rgb(0, 255, 64);
+            font-family: inherit;
+            font-size: inherit;
+            letter-spacing: inherit;
+            cursor: inherit;
+            border-width: 0px;
+            padding: 0px;
+            outline: none;
+        }
+
+        input::-ms-reveal {display: none;}
+        input::-ms-clear {display: none;}
+        p{
+            color:rgb(0, 255, 64);
+        }
+        .cursor {
+            position: relative;
+            border: none;
+        }
+
+        #password {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        #password input {
+            text-align: center;
+        }
+
+        #input-form {
+            display: none;
+        }
+
+        #input-form input {
+            flex-grow: 1;
+        }
+        
+    </style>
+    <script>
+        var goodPassword = false;
+
+        function password() {
+            if(document.getElementById("password-input").value == "test"){
+                document.getElementsByClassName("response")[0].innerHTML="Correct";
+                document.getElementById("password").style.display = "none";
+                document.getElementById("input-form").style.display = "flex";
+                goodPassword = true;
+                refocus();
+            } else {
+                document.getElementsByClassName("pass-out")[0].innerHTML="try again.";
+            }
+            document.getElementById("user-input").value="";
+        }
+        function refocus(){
+            if (goodPassword) {
+                document.getElementById("user-input").focus();
+            } else {
+                document.getElementById("password-input").focus();
+            }
+        }
+        function Enter() {
+            let input = document.getElementById("user-input").value;
+            input = input.toLowerCase();
+        
+            if(input == "tab"){
+                document.getElementsByClassName("response")[0].innerHTML="Hello Friend";
+            }
+            else if(input == "tabitha"){
+                document.getElementsByClassName("response")[0].innerHTML="Yes?";
+            }
+            else if(input == "ana"){
+                document.getElementsByClassName("response")[0].innerHTML="Your forlorn clothes are crying out.";
+            }
+			else if(input == "analisa"){
+                document.getElementsByClassName("response")[0].innerHTML="ana?";
+            }
+			else if(input == "t"){
+                document.getElementsByClassName("response")[0].innerHTML="taleah?";
+            }
+			else if(input == "taleah"){
+                document.getElementsByClassName("response")[0].innerHTML="taleah?";
+            }
+			else if(input == "aiden"){
+                document.getElementsByClassName("response")[0].innerHTML="aiden?";
+            }
+            else if(input == "exit"){
+                location.reload();
+            }
+            else{
+                document.getElementsByClassName("response")[0].innerHTML="Unknown User";
+            }
+            //clears user input after response.
+            document.getElementById("user-input").value="";
+            return false;
+        }
+               
+    </script>
+  </head>
+  <body onclick="refocus()">
+    <form id="password" onsubmit="password(); return false;">
+        <label for="user-input" id="input-label">Password? </label>
+        <input type="password" id="password-input" class="rq-form-element" autocomplete="off" autofocus/>
+        <p class="pass-out"></p>
+        <input type="submit" style="display: none;"/>
+    </form>
+    <form id="input-form" onsubmit="Enter(); return false;">
+        <input type="text" id="user-input" class="rq-form-element" autocomplete="off" autofocus/>
+        <input type="submit" style="display: none;"/>
+    </form>
+    <div class="output">
+        <p class="response"></p>
+    </div>
+    
+  </body>
+</html>
